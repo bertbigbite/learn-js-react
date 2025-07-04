@@ -3,7 +3,7 @@ import modules from "./modules";
 import Menu from "./components/Menu";
 import Hero from "./components/Hero";
 import Container from "./components/Container";
-import "../App.scss"; // Global styles
+import "./App.scss"; // Global styles
 
 function App() {
   const [activeModule, setActiveModule] = useState("Variables");

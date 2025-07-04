@@ -1,27 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 import "../App.scss";
 
-function Menu({
-  modules,
-  onSelect,
-  onColorChange,
-  showIcons = false
-}) {
-  const rootRef = React.useRef();
-  const indicator1Ref = React.useRef();
-  const indicator2Ref = React.useRef();
-  const itemRefs = React.useRef(modules.map(() => React.createRef()));
-  const [active, setActive] = React.useState(0);
-  const [isTight, setIsTight] = React.useState(false);
+gsap.registerPlugin(ScrollTrigger);
 
-  const animate = () => {
+function Menu({ modules, onSelect, onColorChange, showIcons = false }) {
+  const rootRef = useRef();
+  const indicator1Ref = useRef();
+  const indicator2Ref = useRef();
+  const itemRefs = useRef(modules.map(() => React.createRef()));
+
+  const [active, setActive] = useState(0);
+  const [isTight, setIsTight] = useState(false);
+
+  const animate = useCallback(() => {
+    if (!itemRefs.current[active]?.current || !rootRef.current) return;
+
     const menuOffset = rootRef.current.getBoundingClientRect();
     const activeItem = itemRefs.current[active].current;
     const { width, height, top, left } = activeItem.getBoundingClientRect();
-
     const color = modules[active]?.color;
 
     const settings = {
@@ -31,18 +29,18 @@ function Menu({
       height,
       backgroundColor: color,
       ease: "elastic.out(.7, .7)",
-      duration: 0.8
+      duration: 0.8,
     };
 
     gsap.to(indicator1Ref.current, settings);
     gsap.to(indicator2Ref.current, { ...settings, duration: 1 });
-  };
+  }, [active, modules]);
 
-useEffect(() => {
+  useEffect(() => {
     animate();
     window.addEventListener("resize", animate);
     return () => window.removeEventListener("resize", animate);
-  }, [active]);
+  }, [animate]);
 
   const handleClick = (mod, index) => {
     onSelect(mod.name);
@@ -87,4 +85,5 @@ useEffect(() => {
     </div>
   );
 }
+
 export default Menu;
