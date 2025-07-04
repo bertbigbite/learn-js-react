@@ -2482,3 +2482,4 @@ run();`,
     ],
   },
 };
+export default modules;
