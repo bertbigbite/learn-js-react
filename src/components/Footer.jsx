@@ -15,6 +15,8 @@ function Footer() {
             <span>Learn JS</span>
           </div>
           <p className="footer-tagline">Learning to code, confidently.</p>
+          <div className="bb-logo">        <img src="https://ik.imagekit.io/bertbigbite/bigbite-logo-white.png?updatedAt=1745494405551" alt="" />
+</div>
         </div>
 
         <div className="footer-section-contact">
@@ -35,9 +37,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="footer-bottom">
-        <div className="bb-logo">Big Bite</div>
-      </div>
+
     </footer>
   );
 }

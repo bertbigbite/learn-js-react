@@ -1,7 +1,6 @@
 import React from "react";
 import HowItWorks from "./HowItWorks";
-import Footer from "./Footer";
-import "./Hero.scss"; // Import styles for the Hero component
+import "./Hero.scss";
 
 function Hero() {
   return (
@@ -56,7 +55,6 @@ function Hero() {
                 </div>
               </div>
             </div>
-
             <div className="flex-right">
               <img
                 className="hero-image"

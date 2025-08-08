@@ -3,7 +3,7 @@
   background-color: #000;
   width:100%;
   color: #fff;
-  padding: 100px 20px 30px;
+  padding: 100px 30px 50px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -16,7 +16,6 @@
   justify-content: space-between;
   gap: 60px;
   width: 100%;
-  margin: 0;
   padding: 0 80px;
 }
 
@@ -27,7 +26,7 @@
 
 .footer-logo {
   display: flex;
-  align-items: center;
+  align-items: end;
   gap: 14px;
   font-size: 24px;
   font-weight: 600;
@@ -43,7 +42,7 @@
 .footer-tagline {
   font-size: 18px;
   font-style: italic;
-  color: #444;
+  color: #f1f1f1;
   margin-top: 6px;
 }
 
@@ -64,11 +63,11 @@
   margin-bottom: 8px;
   font-size: 16px;
   font-weight: 600;
-  color: #222;
+  color: #fff;
 }
 
 .footer-section a {
-  color: #333;
+  color: #fff;
   text-decoration: none;
   font-size: 14px;
 }
@@ -80,12 +79,17 @@
 .footer-bottom {
   text-align: center;
   padding-top: 20px;
-  border-top: 1px solid #eee;
   font-size: 14px;
   color: #777;
 }
 
 .bb-logo {
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+.bb-logo img {
+  width:150px;
 }
