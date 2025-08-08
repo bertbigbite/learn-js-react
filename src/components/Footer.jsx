@@ -1,4 +1,5 @@
 import React from "react";
+import "./Footer.scss"; // Import styles for the Footer component
 
 function Footer() {
   return (
@@ -8,7 +9,7 @@ function Footer() {
           <div className="footer-logo">
             <img
               className="logo"
-              src="https://ik.imagekit.io/bertbigbite/logos/logo_dark.png?updatedAt=1749209733881"
+              src="https://ik.imagekit.io/bertbigbite/logos/logo.png?updatedAt=1749121280588"
               alt="Learn JS logo"
             />
             <span>Learn JS</span>

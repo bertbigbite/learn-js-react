@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import modules from "./modules";
 import Menu from "./components/Menu";
 import Hero from "./components/Hero";
+import Footer from "./components/Footer";
 import Container from "./components/Container";
-import "./App.scss"; // Global styles
+import "./App.scss";
 
 function App() {
   const [activeModule, setActiveModule] = useState("Variables");
@@ -107,6 +108,8 @@ function App() {
             />
           </div>
         </div>
+              <Footer />
+
       </div>
     </div>
   );
