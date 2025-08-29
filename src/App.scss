@@ -109,12 +109,19 @@ input {
   padding: 20px;
 }
 
+.wrapper {
+  display: flex;
+  gap:4rem;
+  height:100%;
+  flex-direction: column;
+}
+
 .app {
   position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 100vh;
   min-width: 100vw;
   z-index: 0;
   border-radius: 28px 28px 0 0;
@@ -187,6 +194,11 @@ input {
 }
 .main-content-holder.hidden {
   display: none;
+}
+
+.main-content-holder {
+  display:flex;
+  height:100%;
 }
 
 .main-content-holder .hero img {

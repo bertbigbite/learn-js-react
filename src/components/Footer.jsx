@@ -15,6 +15,7 @@ function Footer() {
             <span>Learn JS</span>
           </div>
           <p className="footer-tagline">Learning to code, confidently.</p>
+
         </div>
 
         <div className="footer-section-contact">
@@ -39,7 +40,7 @@ function Footer() {
           <img
               className="bb-logo"
               src="https://ik.imagekit.io/bertbigbite/bigbite-logo-white.png?updatedAt=1745494405551"
-              alt="Learn JS logo"
+              alt="Big Bite logo"
         />
         <div className="social-icons">
           <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
