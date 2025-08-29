@@ -4,6 +4,7 @@ import Menu from "./components/Menu";
 import Hero from "./components/Hero";
 import Container from "./components/Container";
 import "./App.scss"; // Global styles
+import Footer from "./components/Footer";
 
 function App() {
   const [activeModule, setActiveModule] = useState("Variables");
@@ -106,6 +107,7 @@ function App() {
               handleClose={handleClose}
             />
           </div>
+          <Footer />
         </div>
       </div>
     </div>
