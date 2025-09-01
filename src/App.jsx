@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import modules from "./modules";
 import Menu from "./components/Menu";
 import Hero from "./components/Hero";
+import ContactBanner from "./components/ContactBanner";
 import Footer from "./components/Footer";
 import Container from "./components/Container";
 import "./App.scss"; // Global styles
+import HowItWorks from "./components/HowItWorks";
 
 function App() {
   const [activeModule, setActiveModule] = useState("Variables");
@@ -107,6 +109,8 @@ function App() {
               handleClose={handleClose}
             />
           </div>
+          <HowItWorks />
+          <ContactBanner />
           <Footer />
         </div>
 

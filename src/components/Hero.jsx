@@ -29,12 +29,7 @@ function Hero() {
 
           </div>
           </div>
-
-          <div className="hero-container-right">
-          <img className="hero-image" src="https://ik.imagekit.io/bertbigbite/logos/hero.png?updatedAt=1751546383253" alt="" />
-        </div>
     </div>
-    <HowItWorks />
   </section>
 </div>
   );

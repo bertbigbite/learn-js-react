@@ -1,0 +1,70 @@
+.contact-banner-section {
+  margin:auto;
+  margin-top:8rem;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
+  border-radius: 23px;
+  width: 70%;
+  height:100%;
+}
+
+.contact-banner-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .contact-banner-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hiw-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.contact-banner-header {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.contact-banner-header h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.25;
+  color: #000;
+}
+
+@media (min-width: 640px) {
+  .contact-banner-header h2 {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-banner-header h2 {
+    font-size: 2.25rem;
+  }
+}
+
+.contact-banner-header p {
+  max-width: 32rem;
+  margin: 1rem auto;
+  font-size: 1rem;
+  line-height: 1.625;
+  color: #000;
+}
+
+.btn-primary {
+  margin-top:3rem;
+}
