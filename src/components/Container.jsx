@@ -1,7 +1,7 @@
 import LessonCard from "./LessonCard";
 import Menu from "./Menu";
 import modules from "../modules";
-import "../App.scss";
+import "../scss/Container.scss";
 import React from "react";
 
 function Container({
@@ -26,7 +26,8 @@ function Container({
   const anyCardExpanded = activeLessonId !== null;
 
   return (
-    <div className="container">
+          <div className={`container ${anyCardExpanded ? "expanded" : ""}`}>
+
       <div className={`container-left ${anyCardExpanded ? "condensed" : ""}`}>
         <div className="sidebar">
           <img
@@ -84,7 +85,8 @@ function Container({
         </div>
       </div>
 
-      <div className="container-right">
+            <div className={`container-right ${anyCardExpanded ? "expanded" : ""}`}>
+
         <div
           className={`module-header-wrapper ${anyCardExpanded ? "hidden" : ""}`}
         >

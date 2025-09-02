@@ -1,0 +1,148 @@
+.console {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #000;
+  gap: 10px;
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  font-family: monospace;
+  max-width: 100%;
+  min-height: 400px;
+  height: fit-content;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.console-lights {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.light {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+}
+
+.red {
+  background-color: #ef4444;
+}
+.yellow {
+  background-color: #facc15;
+}
+.green {
+  background-color: #22c55e;
+}
+
+.console-title {
+  font-size: 0.875rem;
+  color: #ffffff;
+}
+
+.console-body {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.console-input {
+  width: 100%;
+  min-height: 150px;
+  background: transparent;
+  color: #ffffff;
+  resize: none;
+  border: none;
+  outline: none;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.console-code {
+  white-space: pre-wrap;
+  color: #ffffff;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  min-height: 150px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card-toggle {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 16px;
+  gap: 0.25rem;
+}
+
+.console-button {
+  background-color: #45c1ff;
+  color: #ffffff;
+  font-size: 0.675rem;
+  font-weight: bolder;
+  padding: 0.35rem 0.75rem;
+  border: solid 1px transparent;
+  border-radius: 0.4rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  width: 3rem;
+}
+
+.console-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px black, 0 0 0 4px #45c1ff;
+}
+
+.console-button:hover {
+  background-color: #f4f4f4;
+  color: #000000;
+}
+
+.card-toggle button {
+  background-color: #22c55e;
+  color: white;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  width: 5rem;
+  transform: translateY(2px);
+}
+
+.card-toggle button:hover {
+  background-color: #f6f6f6;
+  color: #16a34a;
+}
+
+.card-toggle button:active {
+  background-color: #f6f6f6;
+  color: #16a34a;
+}
+
+.console-output {
+  white-space: pre-wrap;
+  min-height: 4rem;
+  font-size: 0.75rem;
+}
+
+.output-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  margin-top: 0.5rem;
+  color: #ffffff;
+  font-size: 0.7rem;
+  border-top: 1px solid gray;
+  padding: 0.5rem 0;
+}

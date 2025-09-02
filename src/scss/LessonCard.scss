@@ -1,0 +1,347 @@
+
+.lesson-card-wrapper {
+  flex: 0 0 auto;
+  border-radius: 12px;
+  background: linear-gradient(to right, #f2f2f2, #dcdcdc, #b9b9b9);
+  padding: 2px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  transition: all 0.1s ease-in-out;
+}
+
+.lesson-card-wrapper.expanded.correct,
+.lesson-card-wrapper.expanded.correct:hover {
+  background: linear-gradient(to right, #97ff00, #64ff00, #00ff42);
+  box-shadow: #22c55e 0px 0px 10px;
+}
+
+.lesson-card-wrapper.expanded.incorrect,
+.lesson-card-wrapper.expanded.incorrect:hover {
+  background: linear-gradient(to right, #ff3535, #eb1915, #d30101);
+  box-shadow: #d30101 0px 0px 10px;
+}
+
+.lesson-card-wrapper.expanded {
+  flex: 1 1 100%;
+  width: 100%;
+  height: 100%;
+  border-radius: 35px;
+  background: #f2f2f2;
+  box-shadow: none;
+}
+
+.lesson-card-wrapper:hover {
+  background-size: 400% 400%;
+  animation: backgroundAnimation 4s ease infinite;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lesson-card-wrapper.expanded:hover {
+  background-size: initial;
+  box-shadow:none;
+  animation: none;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.lesson-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1rem;
+  padding-top: 2rem;
+  position: relative;
+  cursor: pointer;
+  width: 222px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.lesson-card.expanded {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  padding: 1.5rem 2rem;
+  border-radius: 35px;
+}
+
+.lesson-card.expanded:hover {
+  box-shadow: none;
+}
+
+.lesson-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: rotate(15deg);
+  background-image: linear-gradient(
+      90deg,
+      rgba(128, 128, 255, 0.2) 1px,
+      transparent 1px
+    ),
+    linear-gradient(0deg, rgba(128, 128, 255, 0.2) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridPan 6s linear infinite;
+
+  /* Fade from top-left to bottom-right */
+mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0)
+    ),
+    linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  -webkit-mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0)
+    ),
+    linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+     mask-size: 100% 50%;
+  mask-repeat: no-repeat;
+  mask-position: right top, left bottom;
+  -webkit-mask-size: 100% 50%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: right top, left bottom;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.lesson-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes gridPan {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-40px, -20px);
+  }
+}
+
+.module-header-wrapper.hidden,
+.module-hero.hidden {
+  display: none;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.lesson-date {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.lesson-grid.grid-expanded .lesson-date {
+  font-size: 0.9rem;
+}
+
+.lesson-title-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lesson-description {
+  display:none;
+}
+
+.lesson-card-wrapper.expanded .lesson-title-header .lesson-description {
+  display:block;
+  font-size: 1.15rem;
+  color: #6b7280;
+  width:60rem;
+  margin-top: 0.5rem;
+}
+
+.lesson-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+
+
+.lesson-grid.grid-expanded .lesson-title {
+  font-size: 2rem;
+}
+
+.lesson-grid.grid-expanded {
+  min-width: 100%;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.lesson-card-wrapper.expanded .lesson-card-header {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+
+  .lesson-date {
+    display:none;
+  }
+
+  .lesson-title {
+    font-size: 3rem;
+    font-weight:bold
+  }
+}
+
+.lesson-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lesson-subtitle {
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.lesson-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.lesson-tag {
+  background-color: #f3e8ff;
+  color: #7e22ce;
+  font-size: 0.6rem;
+  padding: 0.15rem 0.425rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.lesson-grid.grid-expanded .lesson-tag {
+  font-size: 1rem;
+  padding: 0.25rem 0.725rem;
+  margin-top: 0.5rem;
+}
+
+.lesson-toggle-buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.lesson-toggle-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: black;
+  background-color: #f4f4f4;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.lesson-toggle-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #111827;
+}
+
+.lesson-toggle-button:hover {
+  background-color: #45c1ff;
+}
+
+.lesson-toggle-button.active {
+  background-color: #45c1ff;
+  color: #000000;
+}
+
+.lesson-expanded-content {
+  margin-top: 0.75rem;
+  min-width: 100%;
+}
+
+.lesson-example-text {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #4b5563;
+}
+
+.lesson-task-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding-top:20px;
+  border-top: 2px solid #e5e7eb;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.lesson-task-list {
+  list-style: circle inside;
+  line-height: 150%;
+  font-size: 1rem;
+  padding-left: 0.8rem;
+  margin-bottom: 1.2rem;
+  color: #4b5563;
+  margin-top: 0.5rem;
+}
+
+.lesson-task-list ul {
+  list-style-position: inside;
+}
+
+.lesson-toggle-icon {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.toggle-arrow {
+  width: 1.5rem;
+  background-color: #f4f4f4;
+  color: #45c1ff;
+  border-radius: 50%;
+  height: 1.5rem;
+  transition: transform 0.8s ease;
+}
+
+.toggle-arrow:hover,
+.toggle-arrow.open .toggle-arrow:hover {
+  transform: scale(1.2);
+  background-color: #f4f4f4;
+  color: #45c1ff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+
+.toggle-arrow.open {
+  transform: rotate(180deg);
+  width: 2rem;
+  height: 2rem;
+}
+
+.hero-image {
+  height: 550px;
+  width: 700px;
+  object-fit: cover;
+}

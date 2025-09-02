@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ConsoleRunner from "./ConsoleRunner";
-import "../App.scss"; // Import styles for the component
+import "../scss/LessonCard.scss"; // Import styles for the component
 
 function LessonCard({
   lesson,
@@ -17,6 +17,9 @@ function LessonCard({
 
   const [isCorrect, setIsCorrect] = React.useState(false);
   const [isIncorrect, setIsIncorrect] = React.useState(false);
+  const [hasSucceeded, setHasSucceeded] = React.useState(false);
+  const [hasFailed, setHasFailed] = React.useState(false);
+
 
   return (
     <article
@@ -24,13 +27,19 @@ function LessonCard({
         expanded ? "expanded" : ""
       } ${className}  ${isCorrect ? "correct" : ""} ${
         isIncorrect ? "incorrect" : ""
-      }`}
+      } ${hasSucceeded ? "succeeded" : ""} ${ hasFailed ? "failed" : "" }`}
     >
       <div className={`lesson-card ${expanded ? "expanded" : ""}`}>
         {/* Static info */}
         <div className="lesson-card-header">
           <time className="lesson-date">{lesson.date}</time>
-          <h3 className="lesson-title">{lesson.title}</h3>
+          <div className="lesson-title-header">
+            <h3 className="lesson-title">{lesson.title}</h3>
+          <p className="lesson-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec tincidunt varius,
+nisl nunc faucibus lorem, sed placerat elit leo a risus. Cras vel leo ac purus cursus interdum.
+Aliquam erat volutpat. Integer at facilisis magna, vel hendrerit risus.</p>
+
+          </div>
 
           {/* Tags */}
           <div className="lesson-tags">
@@ -95,7 +104,9 @@ function LessonCard({
                     code={lesson.task.code}
                     editable
                     onCodeCorrect={setIsCorrect}
-                    onCodeIncorrect={setIsIncorrect}
+                      onCodeIncorrect={setIsIncorrect}
+                      onSuccess={setHasSucceeded}
+                      onFailure={setHasFailed}
                   />
                 </>
               )}
@@ -119,6 +130,21 @@ function LessonCard({
             <polyline points="7 7, 17 17" />
             <polyline points="17 7, 17 17, 7 17" />
           </svg>
+        </div>
+      </div>
+      <div>
+        <div className="success-failure-message">
+          {hasSucceeded && (
+            <div className="success-message">
+              <strong>Success!</strong> You completed the task correctly. Lets move onto the next lesson.
+            </div>
+          )}
+          {hasFailed && (
+            <div className="failure-message">
+              <strong>Try Again!</strong> The code did not produce the expected output.
+            </div>
+          )}
+
         </div>
       </div>
     </article>

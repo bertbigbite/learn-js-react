@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import "../scss/ConsoleRunner.scss";
 
-function ConsoleRunner({ code, editable, onCodeCorrect, onCodeIncorrect }) {
+function ConsoleRunner({ code, editable, onCodeCorrect, onCodeIncorrect, onSuccess, onFailure }) {
   const [input, setInput] = useState(code);
   const [output, setOutput] = useState("");
 
@@ -22,15 +23,21 @@ function ConsoleRunner({ code, editable, onCodeCorrect, onCodeIncorrect }) {
       if (result === "No output defined") {
         onCodeCorrect?.(false);
         onCodeIncorrect?.(true);
+        onSuccess?.(false);
+        onFailure?.(true);
       } else {
         onCodeCorrect?.(true);
         onCodeIncorrect?.(false);
+        onSuccess?.(true);
+        onFailure?.(false);
       }
     } catch (err) {
       setOutput("Error: " + err.message);
       if (onCodeIncorrect) {
         onCodeIncorrect(true);
         onCodeCorrect(false);
+        onFailure(true);
+        onSuccess(false);
       }
     } finally {
       console.log = originalLog;
