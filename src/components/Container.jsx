@@ -16,18 +16,13 @@ function Container({
   activeContent,
   handleSelect,
   setModuleColor,
-  moduleColor
+  moduleColor,
+  popoverRef
 }) {
-  const reorderedLessons = [
-    ...(activeLessonId ? [lessons.find((l) => l.id === activeLessonId)] : []),
-    ...lessons.filter((lesson) => lesson.id !== activeLessonId)
-  ];
-
   const anyCardExpanded = activeLessonId !== null;
 
   return (
-          <div className={`container ${anyCardExpanded ? "expanded" : ""}`}>
-
+    <div className={`container ${anyCardExpanded ? "expanded" : ""}`}>
       <div className={`container-left ${anyCardExpanded ? "condensed" : ""}`}>
         <div className="sidebar">
           <img
@@ -40,7 +35,7 @@ function Container({
               name,
               href: "#",
               color: ["#7f5af0", "#ff8906", "#f25f4c", "#2cb67d"][index % 4],
-              icon: modules[name].icon || null
+              icon: modules[name].icon || null,
             }))}
             onSelect={handleSelect}
             activeContent={activeContent}
@@ -61,7 +56,7 @@ function Container({
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-house-fill"
+                className="bi bi-house-fill"
                 viewBox="0 0 16 16"
               >
                 <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
@@ -75,7 +70,7 @@ function Container({
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-x-lg"
+                className="bi bi-x-lg"
                 viewBox="0 0 16 16"
               >
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
@@ -85,8 +80,7 @@ function Container({
         </div>
       </div>
 
-            <div className={`container-right ${anyCardExpanded ? "expanded" : ""}`}>
-
+      <div className={`container-right ${anyCardExpanded ? "expanded" : ""}`}>
         <div
           className={`module-header-wrapper ${anyCardExpanded ? "hidden" : ""}`}
         >
@@ -109,7 +103,7 @@ function Container({
                 width="10"
                 height="10"
                 fill={moduleColor}
-                class="bi bi-grid-3x2-gap"
+                className="bi bi-grid-3x2-gap"
                 viewBox="0 0 16 16"
               >
                 <path d="M4 4v2H2V4zm1 7V9a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m5 5V9a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1M9 4v2H7V4zm5 0h-2v2h2zM4 9v2H2V9zm5 0v2H7V9zm5 0v2h-2V9zm-3-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm1 4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1z" />
@@ -124,7 +118,7 @@ function Container({
                 width="10"
                 height="10"
                 fill={moduleColor}
-                class="bi bi-stopwatch"
+                className="bi bi-stopwatch"
                 viewBox="0 0 16 16"
               >
                 <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z" />
@@ -135,28 +129,33 @@ function Container({
             </span>
           </div>
         </div>
+
         <div className={`module-hero ${anyCardExpanded ? "hidden" : ""}`}>
           <h1>Start learning</h1>
         </div>
-        <div
-          className={`lesson-grid ${anyCardExpanded ? "grid-expanded" : ""}`}
-        >
-          {reorderedLessons.map((lesson) => {
+
+        <div className={`lesson-grid ${anyCardExpanded ? "grid-expanded" : ""}`}>
+          {lessons.map((lesson) => {
             const isActive = activeLessonId === lesson.id;
             const isAnotherLessonOpen = activeLessonId && !isActive;
 
             if (isAnotherLessonOpen) {
-              return null;
+            return null; // hide all other cards
             }
 
             return (
+
+
               <LessonCard
                 key={lesson.id}
                 lesson={lesson}
-                expanded={isActive}
+                expanded={lesson.id === activeLessonId}
                 onExpand={() => setActiveLessonId(lesson.id)}
                 onCollapse={() => setActiveLessonId(null)}
-                onToggle={() => setActiveLessonId(isActive ? null : lesson.id)}
+                activeLessonId={activeLessonId}
+                setActiveLessonId={setActiveLessonId}
+                lessons={lessons}
+                popoverRef={popoverRef}
               />
             );
           })}

@@ -12,20 +12,21 @@
 .lesson-card-wrapper.expanded.correct,
 .lesson-card-wrapper.expanded.correct:hover {
   background: linear-gradient(to right, #97ff00, #64ff00, #00ff42);
-  box-shadow: #22c55e 0px 0px 10px;
+  box-shadow: #22c55e 0px 0px 1px;
 }
 
 .lesson-card-wrapper.expanded.incorrect,
 .lesson-card-wrapper.expanded.incorrect:hover {
   background: linear-gradient(to right, #ff3535, #eb1915, #d30101);
-  box-shadow: #d30101 0px 0px 10px;
+  box-shadow: #d30101 0px 0px 1px;
 }
 
 .lesson-card-wrapper.expanded {
   flex: 1 1 100%;
   width: 100%;
   height: 100%;
-  border-radius: 35px;
+  padding:4px;
+  border-radius: 20px;
   background: #f2f2f2;
   box-shadow: none;
 }
@@ -40,6 +41,13 @@
   background-size: initial;
   box-shadow:none;
   animation: none;
+}
+
+.success-failure-message {
+  position:absolute;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
 }
 
 @keyframes backgroundAnimation {
@@ -73,8 +81,53 @@
   width: 100%;
   height: 100%;
   cursor: default;
-  padding: 1.5rem 2rem;
-  border-radius: 35px;
+  padding: 0;
+  border-radius: 17px;
+}
+
+.lesson-card-wrapper .lesson-overlay {
+  display:none;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 10rem;
+  background:transparent;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  margin:auto;
+}
+
+.lesson-card-wrapper.expanded .lesson-overlay.succeeded,
+.lesson-card-wrapper.expanded .lesson-overlay.failed {
+  display:flex;
+  top: 0;
+  left:0;
+  height: 100%;
+  width:100%;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.lesson-card.expanded.overlay-active, .lesson-card-wrapper.expanded.overlay-active {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.lesson-card-body.expanded {
+  display:flex;
+  flex-direction: column;
+  gap:0rem;
+  padding: 2.5rem;
+  padding-top: 1rem;
+}
+
+.lesson-card-footer.expanded {
+  padding: 1.2rem;
+  padding-bottom: 1.2rem;
+  padding-top:0;
 }
 
 .lesson-card.expanded:hover {
@@ -179,8 +232,6 @@ mask-image: linear-gradient(
   color: #111827;
 }
 
-
-
 .lesson-grid.grid-expanded .lesson-title {
   font-size: 2rem;
 }
@@ -195,6 +246,9 @@ mask-image: linear-gradient(
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  background-color:#000000;
+  padding: 2rem;
+  padding-top:1rem;
   gap: 1rem;
 
   .lesson-date {
@@ -203,6 +257,7 @@ mask-image: linear-gradient(
 
   .lesson-title {
     font-size: 3rem;
+    color:#ffffff;
     font-weight:bold
   }
 }
@@ -289,8 +344,6 @@ mask-image: linear-gradient(
 .lesson-task-title {
   font-size: 1.3rem;
   font-weight: 600;
-  padding-top:20px;
-  border-top: 2px solid #e5e7eb;
   margin-bottom: 1rem;
   color: #1f2937;
 }

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import ConsoleRunner from "./ConsoleRunner";
+import LessonOverlay from "./LessonOverlay";
 import "../scss/LessonCard.scss"; // Import styles for the component
 
 function LessonCard({
   lesson,
+  lessons,
   expanded,
   onExpand,
   onCollapse,
+  activeLessonId,
+  setActiveLessonId,
+  popoverRef,
   className = ""
 }) {
   const [showExample, setShowExample] = useState(true);
@@ -27,9 +32,10 @@ function LessonCard({
         expanded ? "expanded" : ""
       } ${className}  ${isCorrect ? "correct" : ""} ${
         isIncorrect ? "incorrect" : ""
-      } ${hasSucceeded ? "succeeded" : ""} ${ hasFailed ? "failed" : "" }`}
+      } `}
     >
-      <div className={`lesson-card ${expanded ? "expanded" : ""}`}>
+      <div className={`lesson-card ${expanded ? "expanded" : ""}
+      ${ expanded && hasSucceeded || hasFailed ? "overlay-active" : ""}`}>
         {/* Static info */}
         <div className="lesson-card-header">
           <time className="lesson-date">{lesson.date}</time>
@@ -46,7 +52,8 @@ Aliquam erat volutpat. Integer at facilisis magna, vel hendrerit risus.</p>
             <span className="lesson-tag">{lesson.tag}</span>
           </div>
         </div>
-        {/* Expandable content */}
+        <div className={`lesson-card-body ${expanded ? "expanded" : ""}`}>
+                  {/* Expandable content */}
         {expanded && (
           <>
             {/* Toggle buttons */}
@@ -100,21 +107,23 @@ Aliquam erat volutpat. Integer at facilisis magna, vel hendrerit risus.</p>
                       <li key={index}>{sentence}</li>
                     ))}
                   </ul>
-                  <ConsoleRunner
-                    code={lesson.task.code}
-                    editable
-                    onCodeCorrect={setIsCorrect}
-                      onCodeIncorrect={setIsIncorrect}
-                      onSuccess={setHasSucceeded}
-                      onFailure={setHasFailed}
+                      <ConsoleRunner
+                        lesson={lesson}
+                        userCode={lesson.task.code}
+                        editable
+                        onCodeCorrect={setIsCorrect}
+                        onCodeIncorrect={setIsIncorrect}
+                        onSuccess={setHasSucceeded}
+                        onFailure={setHasFailed}
                   />
                 </>
               )}
             </div>
           </>
-        )}
+          )}
+          </div>
 
-        {/* Expand/collapse indicator */}
+          <div className={`lesson-card-footer ${expanded ? "expanded" : ""}`}>
         <div className="lesson-toggle-icon">
           <svg
             viewBox="0 0 24 24"
@@ -131,22 +140,27 @@ Aliquam erat volutpat. Integer at facilisis magna, vel hendrerit risus.</p>
             <polyline points="17 7, 17 17, 7 17" />
           </svg>
         </div>
-      </div>
-      <div>
-        <div className="success-failure-message">
-          {hasSucceeded && (
-            <div className="success-message">
-              <strong>Success!</strong> You completed the task correctly. Lets move onto the next lesson.
-            </div>
-          )}
-          {hasFailed && (
-            <div className="failure-message">
-              <strong>Try Again!</strong> The code did not produce the expected output.
-            </div>
-          )}
-
         </div>
       </div>
+
+          <div className={`lesson-overlay ${hasSucceeded ? "succeeded" : ""} ${ hasFailed ? "failed" : "" }`}>
+
+        <LessonOverlay
+          isCorrect={isCorrect}
+          isIncorrect={isIncorrect}
+          hasSucceeded={hasSucceeded}
+          hasFailed={hasFailed}
+          activeLessonId={activeLessonId}
+          setActiveLessonId={setActiveLessonId}
+          lessons={lessons}
+          setIsCorrect={setIsCorrect}
+          setIsIncorrect={setIsIncorrect}
+          setHasSucceeded={setHasSucceeded}
+          setHasFailed={setHasFailed}
+          popoverRef={popoverRef}
+        />
+        </div>
+
     </article>
   );
 }

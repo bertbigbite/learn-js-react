@@ -18,12 +18,7 @@ function App() {
 
   const lessons = modules[activeModule]?.lessons || [];
   const currentLessons = modules[activeModule];
-  const activeLesson = lessons.find((l) => l.id === activeLessonId);
 
-  const reorderedLessons = [
-    ...(activeLesson ? [activeLesson] : []),
-    ...lessons.filter((lesson) => lesson.id !== activeLessonId)
-  ];
 
   const moduleImg =
     modules[activeModule]?.img_url ||
@@ -54,6 +49,7 @@ function App() {
     pop?.addEventListener("toggle", handleToggle);
     return () => pop?.removeEventListener("toggle", handleToggle);
   }, []);
+
 
   return (
     <div className="wrapper">
@@ -94,7 +90,7 @@ function App() {
             className="popover-container"
           >
             <Container
-              lessons={reorderedLessons}
+              lessons={lessons}
               activeLessonId={activeLessonId}
               setActiveLessonId={setActiveLessonId}
               moduleName={activeModule}
@@ -107,6 +103,7 @@ function App() {
               activeContent={activeModule}
               handleSelect={handleSelect}
               handleClose={handleClose}
+              popoverRef={popoverRef}
             />
           </div>
           <HowItWorks />

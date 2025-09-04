@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../scss/ConsoleRunner.scss";
 
-function ConsoleRunner({ code, editable, onCodeCorrect, onCodeIncorrect, onSuccess, onFailure }) {
+function ConsoleRunner({
+  lesson,
+  code,
+  editable,
+  onCodeCorrect,
+  onCodeIncorrect,
+  onSuccess,
+  onFailure
+}) {
   const [input, setInput] = useState(code);
   const [output, setOutput] = useState("");
 
@@ -33,16 +41,34 @@ function ConsoleRunner({ code, editable, onCodeCorrect, onCodeIncorrect, onSucce
       }
     } catch (err) {
       setOutput("Error: " + err.message);
-      if (onCodeIncorrect) {
-        onCodeIncorrect(true);
-        onCodeCorrect(false);
-        onFailure(true);
-        onSuccess(false);
-      }
+      onCodeIncorrect?.(true);
+      onCodeCorrect?.(false);
+      onFailure?.(true);
+      onSuccess?.(false);
     } finally {
       console.log = originalLog;
     }
   }
+
+  // Load from localStorage when lesson changes
+  useEffect(() => {
+    if (!lesson?.id) return; // exit early if lesson is not ready
+
+    const lastCode = localStorage.getItem(`lesson-${lesson.id}-userAttempt`);
+    if (lastCode) {
+      setInput(lastCode);
+    } else {
+      setInput(code); // reset to starter code if nothing saved
+    }
+  }, [lesson, code]);
+
+  // Save code whenever it changes
+  const handleCodeChange = (newCode) => {
+  setInput(newCode);
+  if (lesson?.id) {
+    localStorage.setItem(`lesson-${lesson.id}-userAttempt`, newCode);
+  }
+};
 
 
   return (
@@ -60,10 +86,10 @@ function ConsoleRunner({ code, editable, onCodeCorrect, onCodeIncorrect, onSucce
         {editable ? (
           <textarea
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => handleCodeChange(e.target.value)}
             rows={4}
             className="console-input"
-            autofocus
+            autoFocus
           />
         ) : (
           <pre className="console-code">{input}</pre>
@@ -87,4 +113,5 @@ function ConsoleRunner({ code, editable, onCodeCorrect, onCodeIncorrect, onSucce
     </aside>
   );
 }
+
 export default ConsoleRunner;
