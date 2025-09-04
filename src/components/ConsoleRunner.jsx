@@ -33,11 +33,13 @@ function ConsoleRunner({
         onCodeIncorrect?.(true);
         onSuccess?.(false);
         onFailure?.(true);
+        localStorage.setItem(`lesson-${lesson.id}-status`, "incorrect");
       } else {
         onCodeCorrect?.(true);
         onCodeIncorrect?.(false);
         onSuccess?.(true);
         onFailure?.(false);
+        localStorage.setItem(`lesson-${lesson.id}-status`, "correct");
       }
     } catch (err) {
       setOutput("Error: " + err.message);
@@ -45,6 +47,7 @@ function ConsoleRunner({
       onCodeCorrect?.(false);
       onFailure?.(true);
       onSuccess?.(false);
+      localStorage.setItem(`lesson-${lesson.id}-status`, "incorrect");
     } finally {
       console.log = originalLog;
     }
@@ -68,7 +71,9 @@ function ConsoleRunner({
   if (lesson?.id) {
     localStorage.setItem(`lesson-${lesson.id}-userAttempt`, newCode);
   }
-};
+  };
+
+
 
 
   return (

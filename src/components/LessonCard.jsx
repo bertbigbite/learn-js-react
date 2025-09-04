@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ConsoleRunner from "./ConsoleRunner";
 import LessonOverlay from "./LessonOverlay";
 import "../scss/LessonCard.scss"; // Import styles for the component
@@ -24,6 +24,15 @@ function LessonCard({
   const [isIncorrect, setIsIncorrect] = React.useState(false);
   const [hasSucceeded, setHasSucceeded] = React.useState(false);
   const [hasFailed, setHasFailed] = React.useState(false);
+  const [status, setStatus] = React.useState("");
+
+// When a user runs their code and it passes/fails, the status (correct or incorrect) is saved in localStorage.
+// On reload or revisiting, LessonCard reads that saved status and applies the class, automatically styling the card based on correct or incorrect.
+
+useEffect(() => {
+    const saved = localStorage.getItem(`lesson-${lesson.id}-status`);
+    if (saved) setStatus(saved);
+  }, [lesson.id]);
 
 
   return (
@@ -32,15 +41,15 @@ function LessonCard({
         expanded ? "expanded" : ""
       } ${className}  ${isCorrect ? "correct" : ""} ${
         isIncorrect ? "incorrect" : ""
-      } `}
+      } ${status}`}
     >
       <div className={`lesson-card ${expanded ? "expanded" : ""}
-      ${ expanded && hasSucceeded || hasFailed ? "overlay-active" : ""}`}>
+      ${ expanded && hasSucceeded || hasFailed ? "overlay-active" : ""} ${status}`}>
         {/* Static info */}
         <div className="lesson-card-header">
           <time className="lesson-date">{lesson.date}</time>
           <div className="lesson-title-header">
-            <h3 className="lesson-title">{lesson.title}</h3>
+            <h3 className={`lesson-title ${status}`} >{lesson.title}</h3>
           <p className="lesson-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec tincidunt varius,
 nisl nunc faucibus lorem, sed placerat elit leo a risus. Cras vel leo ac purus cursus interdum.
 Aliquam erat volutpat. Integer at facilisis magna, vel hendrerit risus.</p>

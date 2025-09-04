@@ -89,6 +89,13 @@ function App() {
             popover="manual"
             className="popover-container"
           >
+            <div className ="container-header">
+              <img
+                src="https://ik.imagekit.io/bertbigbite/logos/logo.png?updatedAt=1749121280588"
+                alt="Logo"
+                className="container-logo"
+              />
+            </div>
             <Container
               lessons={lessons}
               activeLessonId={activeLessonId}
