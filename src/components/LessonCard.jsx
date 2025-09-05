@@ -30,19 +30,24 @@ function LessonCard({
 // On reload or revisiting, LessonCard reads that saved status and applies the class, automatically styling the card based on correct or incorrect.
 
 useEffect(() => {
-    const saved = localStorage.getItem(`lesson-${lesson.id}-status`);
-    if (saved) setStatus(saved);
-  }, [lesson.id]);
+  const saved = localStorage.getItem(`lesson-${lesson.id}-status`);
+  if (saved) setStatus(saved);
+}, [lesson.id]);
+
+// keep status in sync with isCorrect/isIncorrect
+useEffect(() => {
+  if (isCorrect) setStatus("correct");
+  if (isIncorrect) setStatus("incorrect");
+}, [isCorrect, isIncorrect]);
 
 
   return (
     <article
-      className={`lesson-card-wrapper  ${
-        expanded ? "expanded" : ""
-      } ${className}  ${isCorrect ? "correct" : ""} ${
-        isIncorrect ? "incorrect" : ""
-      } ${status}`}
-    >
+  className={`lesson-card-wrapper
+    ${expanded ? "expanded" : ""}
+    ${className}
+    ${status}`}
+>
       <div className={`lesson-card ${expanded ? "expanded" : ""}
       ${ expanded && hasSucceeded || hasFailed ? "overlay-active" : ""} ${status}`}>
         {/* Static info */}

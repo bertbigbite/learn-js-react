@@ -32,6 +32,8 @@ function LessonOverlay({
   const handleClose = () => {
     setActiveLessonId(null);
     popoverRef.current?.hidePopover();
+    setHasSucceeded(true);
+    setHasFailed(false);
   }
 
   const handleTryAgain = () => {

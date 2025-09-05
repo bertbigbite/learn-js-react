@@ -1,0 +1,13 @@
+.copy-btn {
+  display: flex;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    color: #d57bff;
+  }
+}

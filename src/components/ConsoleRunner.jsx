@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../scss/ConsoleRunner.scss";
+import CopyButton from "./CopyButton";
 
 function ConsoleRunner({
   lesson,
@@ -33,13 +34,17 @@ function ConsoleRunner({
         onCodeIncorrect?.(true);
         onSuccess?.(false);
         onFailure?.(true);
-        localStorage.setItem(`lesson-${lesson.id}-status`, "incorrect");
+        if (lesson?.id) {
+          localStorage.setItem(`lesson-${lesson.id}-status`, "incorrect");
+        }
       } else {
         onCodeCorrect?.(true);
         onCodeIncorrect?.(false);
         onSuccess?.(true);
         onFailure?.(false);
-        localStorage.setItem(`lesson-${lesson.id}-status`, "correct");
+        if (lesson?.id) {
+          localStorage.setItem(`lesson-${lesson.id}-status`, "correct");
+        }
       }
     } catch (err) {
       setOutput("Error: " + err.message);
@@ -47,7 +52,9 @@ function ConsoleRunner({
       onCodeCorrect?.(false);
       onFailure?.(true);
       onSuccess?.(false);
-      localStorage.setItem(`lesson-${lesson.id}-status`, "incorrect");
+      if (lesson?.id) {
+          localStorage.setItem(`lesson-${lesson.id}-status`, "incorrect");
+        }
     } finally {
       console.log = originalLog;
     }
@@ -84,7 +91,11 @@ function ConsoleRunner({
           <div className="light yellow" />
           <div className="light green" />
         </div>
-        <small className="console-title">console</small>
+        <span className="console-title-holder">
+          <CopyButton text={code} />
+          <small className="console-title">console</small>
+        </span>
+
       </div>
 
       <div className="console-body">

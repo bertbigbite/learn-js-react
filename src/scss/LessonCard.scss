@@ -167,6 +167,7 @@
   flex-direction: column;
   gap:0rem;
   padding: 2.5rem;
+  padding-bottom:0;
   padding-top: 1rem;
 }
 
@@ -377,7 +378,7 @@ mask-image: linear-gradient(
 }
 
 .lesson-expanded-content {
-  margin-top: 0.75rem;
+  margin-top: 0;
   min-width: 100%;
 }
 

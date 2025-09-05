@@ -41,6 +41,14 @@
   background-color: #22c55e;
 }
 
+.console-title-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 2rem;
+}
+
 .console-title {
   font-size: 0.875rem;
   color: #ffffff;
