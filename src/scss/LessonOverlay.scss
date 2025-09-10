@@ -50,10 +50,8 @@
   min-width: 7rem;
 }
 
-.next-lesson-button.disabled {
-  background: grey;
-  pointer-events: disable;
-  user-select: none;
+.next-lesson-button:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 

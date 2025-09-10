@@ -15,6 +15,9 @@ function LessonCard({
   className = ""
 }) {
   const [showExample, setShowExample] = useState(true);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [overlayResult, setOverlayResult] = useState(null);
+
 
   const handleToggle = () => {
     expanded ? onCollapse?.() : onExpand?.();
@@ -34,22 +37,42 @@ useEffect(() => {
   if (saved) setStatus(saved);
 }, [lesson.id]);
 
+useEffect(() => {
+  if (status) {
+    localStorage.setItem(`lesson-${lesson.id}-status`, status);
+  }
+}, [status, lesson.id]);
+
 // keep status in sync with isCorrect/isIncorrect
 useEffect(() => {
   if (isCorrect) setStatus("correct");
   if (isIncorrect) setStatus("incorrect");
 }, [isCorrect, isIncorrect]);
 
+  useEffect(() => {
+  let timer;
+
+  if (isCorrect) {
+    timer = setTimeout(() => {
+      setOverlayResult("success");
+      setShowOverlay(true);
+    }, 2000);
+  } else if (isIncorrect) {
+    timer = setTimeout(() => {
+      setOverlayResult("failure");
+      setShowOverlay(true);
+    }, 2000);
+  } else {
+    setShowOverlay(false);
+    setOverlayResult(null);
+  }
+
+  return () => clearTimeout(timer);
+  }, [isCorrect, isIncorrect]);
 
   return (
-    <article
-  className={`lesson-card-wrapper
-    ${expanded ? "expanded" : ""}
-    ${className}
-    ${status}`}
->
-      <div className={`lesson-card ${expanded ? "expanded" : ""}
-      ${ expanded && hasSucceeded || hasFailed ? "overlay-active" : ""} ${status}`}>
+    <article className={`lesson-card-wrapper ${expanded ? "expanded" : ""} ${className} ${status}`}>
+  <div className={`lesson-card ${expanded ? "expanded" : ""} ${expanded && showOverlay ? "overlay-active" : ""} ${status}`}>
         {/* Static info */}
         <div className="lesson-card-header">
           <time className="lesson-date">{lesson.date}</time>
@@ -137,45 +160,53 @@ Aliquam erat volutpat. Integer at facilisis magna, vel hendrerit risus.</p>
           )}
           </div>
 
-          <div className={`lesson-card-footer ${expanded ? "expanded" : ""}`}>
+        <div className={`lesson-card-footer ${expanded ? "expanded" : ""}`}>
+          <div className="lesson-footer-tags">
+            <span className="lesson-tag">{lesson.tag}</span>
+          </div>
+          <span></span>
         <div className="lesson-toggle-icon">
           <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={`toggle-arrow ${expanded ? "open" : ""}`}
-            onClick={handleToggle}
-            style={{ cursor: "pointer" }}
-          >
-            <polyline points="7 7, 17 17" />
-            <polyline points="17 7, 17 17, 7 17" />
-          </svg>
+  viewBox="0 0 20 20"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="1.2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+  className={`toggle-arrow ${expanded ? "open" : ""}`}
+  onClick={handleToggle}
+  style={{ cursor: "pointer", display: "block", margin: "auto" }}
+>
+  <polyline points="7 7, 13 13" />
+  <polyline points="13 7, 13 13, 7 13" />
+</svg>
+
         </div>
         </div>
       </div>
 
-          <div className={`lesson-overlay ${hasSucceeded ? "succeeded" : ""} ${ hasFailed ? "failed" : "" }`}>
-
-        <LessonOverlay
-          isCorrect={isCorrect}
-          isIncorrect={isIncorrect}
-          hasSucceeded={hasSucceeded}
-          hasFailed={hasFailed}
-          activeLessonId={activeLessonId}
-          setActiveLessonId={setActiveLessonId}
-          lessons={lessons}
-          setIsCorrect={setIsCorrect}
-          setIsIncorrect={setIsIncorrect}
-          setHasSucceeded={setHasSucceeded}
-          setHasFailed={setHasFailed}
-          popoverRef={popoverRef}
-        />
-        </div>
-
-    </article>
+      {showOverlay && (
+    <div className="lesson-overlay">
+      <LessonOverlay
+        isCorrect={isCorrect}
+        isIncorrect={isIncorrect}
+        hasSucceeded={hasSucceeded}
+        hasFailed={hasFailed}
+        activeLessonId={activeLessonId}
+        setActiveLessonId={setActiveLessonId}
+        lessons={lessons}
+        setIsCorrect={setIsCorrect}
+        setIsIncorrect={setIsIncorrect}
+        setHasSucceeded={setHasSucceeded}
+        setHasFailed={setHasFailed}
+        popoverRef={popoverRef}
+        showOverlay={showOverlay}
+        setShowOverlay={setShowOverlay}
+        overlayResult={overlayResult}
+      />
+    </div>
+  )}
+</article>
   );
 }
 export default LessonCard;

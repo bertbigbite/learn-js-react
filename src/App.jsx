@@ -12,7 +12,7 @@ function App() {
   const [activeModule, setActiveModule] = useState("Variables");
   const [activeLessonId, setActiveLessonId] = useState(null);
   const [activeContent, setActiveContent] = useState(null);
-  const [moduleColor, setModuleColor] = useState("#7f5af0");
+  const [moduleColor, setModuleColor] = useState("#f3e8ff");
 
   const popoverRef = useRef(null);
 
@@ -69,7 +69,7 @@ function App() {
               modules={Object.keys(modules).map((name, index) => ({
                 name,
                 href: "#",
-                color: ["#7f5af0", "#ff8906", "#f25f4c", "#2cb67d"][index % 4]
+                color: ["#d57bff", "#f3e8ff", "#d57bff", "#f3e8ff"][index % 4]
               }))}
               onSelect={handleSelect}
               activeContent={activeContent}

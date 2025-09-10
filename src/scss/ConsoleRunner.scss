@@ -57,6 +57,7 @@
 .console-body {
   margin-top: 1rem;
   display: flex;
+  flex: auto;
   flex-direction: column;
   justify-content: space-between;
   gap: 0.75rem;
@@ -71,7 +72,7 @@
   border: none;
   outline: none;
   font-family: monospace;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
 }
 
 .console-code {
@@ -95,7 +96,7 @@
 }
 
 .console-button {
-  background-color: #45c1ff;
+  background-color: #d57bff;
   color: #ffffff;
   font-size: 0.675rem;
   font-weight: bolder;
@@ -109,7 +110,7 @@
 
 .console-button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px black, 0 0 0 4px #45c1ff;
+  box-shadow: 0 0 0 2px black, 0 0 0 4px #d57bff;
 }
 
 .console-button:hover {

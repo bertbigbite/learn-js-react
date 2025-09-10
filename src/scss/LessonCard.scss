@@ -7,17 +7,17 @@
   padding: 2px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  // transition: all 0.1s ease-in-out;
 }
 
-.lesson-card-wrapper.expanded.correct, .lesson-card-wrapper.correct,
+.lesson-card-wrapper.expanded.correct, .lesson-card.correct, .lesson-card-wrapper.correct,
 .lesson-card-wrapper.expanded.correct:hover {
-  background: linear-gradient(to right, #97ff00, #5be201, #00c817);
-  box-shadow: #22c55e 0px 0px 1px;
+  background: linear-gradient(to top right, #34d192, #05b06c, #00a563);
+  box-shadow: #00a563 0px 0px 1px;
 }
 
 .lesson-card.correct {
-  background: rgb(158, 255, 155);
+  background: linear-gradient(to top right, #34d192, #1dbd7d, #00a563);
+  box-shadow: none;;
 }
 
 .lesson-card.expanded.correct {
@@ -31,12 +31,12 @@
   right: 0.8rem;
   width: 1.5rem;
   height: 1.5rem;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="white" d="M6.5 11.5L3 8l1-1 2.5 2.5L12 3l1 1-6.5 7.5z"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="green" d="M6.5 11.5L3 8l1-1 2.5 2.5L12 3l1 1-6.5 7.5z"/></svg>');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
-  background-color: #00a563; /* circle behind the check */
+  background-color: #ffffff; /* circle behind the check */
 }
 
 .lesson-card.expanded.correct::after {
@@ -46,11 +46,11 @@
 
 .lesson-card.expanded.correct .lesson-title::after {
   content: "";
-  position: relative;
-  top: 0;
-  right: 0;
-  width: 3rem;
-  height: 3rem;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  width: 2rem;
+  height: 2rem;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M6.5 11.5L3 8l1-1 2.5 2.5L12 3l1 1-6.5 7.5z'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
@@ -60,16 +60,25 @@
 }
 
 
-.lesson-card-wrapper.expanded.incorrect,
+.lesson-card-wrapper.expanded.incorrect,  .lesson-card-wrapper.incorrect,
 .lesson-card-wrapper.expanded.incorrect:hover {
   background: linear-gradient(to right, #ff3535, #eb1915, #d30101);
   box-shadow: #d30101 0px 0px 1px;
 }
 
+.lesson-card.incorrect {
+  background: linear-gradient(to top right, #ff3535, #eb1915, #d30101);
+}
+
+.lesson-card.expanded.incorrect {
+  background: #ffffff;
+}
+
 .lesson-card-wrapper.expanded {
   flex: 1 1 100%;
+  flex-grow: 1;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   padding:4px;
   border-radius: 20px;
   background: #f2f2f2;
@@ -107,7 +116,7 @@
 .lesson-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 1rem;
@@ -122,59 +131,67 @@
 .lesson-card.expanded {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap:0;
   justify-content: space-between;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
+  height:auto;
   cursor: default;
   padding: 0;
   border-radius: 17px;
 }
 
+.lesson-card-wrapper {
+  position: relative;
+}
+
 .lesson-card-wrapper .lesson-overlay {
-  display:none;
   position: absolute;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 10rem;
-  background:transparent;
+  height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
-  margin:auto;
+  z-index: 20;
+  pointer-events: auto;
 }
 
-.lesson-card-wrapper.expanded .lesson-overlay.succeeded,
-.lesson-card-wrapper.expanded .lesson-overlay.failed {
-  display:flex;
-  top: 0;
-  left:0;
-  height: 100%;
-  width:100%;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.lesson-card.expanded.overlay-active, .lesson-card-wrapper.expanded.overlay-active {
+.lesson-card.expanded.overlay-active {
   filter: blur(6px);
   pointer-events: none;
-  user-select: none;
 }
 
+.lesson-card.expanded.overlay-active .lesson-overlay {
+  pointer-events: auto; // allow clicks on overlay
+}
+
+
 .lesson-card-body.expanded {
-  display:flex;
+  display: flex;
   flex-direction: column;
-  gap:0rem;
+  gap: 0;
   padding: 2.5rem;
-  padding-bottom:0;
+  padding-bottom: 0;
   padding-top: 1rem;
+
+  /* let content decide height */
+  height: auto;
+  min-height: auto;
+  flex-grow: 1; /* optional: lets it grow inside parent if needed */
+}
+
+.lesson-card-footer {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  align-items: center;
 }
 
 .lesson-card-footer.expanded {
   padding: 1.2rem;
-  padding-bottom: 1.2rem;
-  padding-top:0;
 }
 
 .lesson-card.expanded:hover {
@@ -251,6 +268,14 @@ mask-image: linear-gradient(
   color: #6b7280;
 }
 
+.lesson-grid {
+  gap: 1rem;
+  max-height:fit-content;
+  justify-content: start;
+  padding-top: 2rem;
+  margin: 0 ;
+}
+
 .lesson-grid.grid-expanded .lesson-date {
   font-size: 0.9rem;
 }
@@ -263,14 +288,6 @@ mask-image: linear-gradient(
 
 .lesson-description {
   display:none;
-}
-
-.lesson-card-wrapper.expanded .lesson-title-header .lesson-description {
-  display:block;
-  font-size: 1.15rem;
-  color: #6b7280;
-  width:60rem;
-  margin-top: 0.5rem;
 }
 
 .lesson-title {
@@ -286,6 +303,7 @@ mask-image: linear-gradient(
 .lesson-grid.grid-expanded {
   min-width: 100%;
   padding-bottom: 0;
+  padding-top: 0;
   margin: 0;
 }
 
@@ -303,10 +321,17 @@ mask-image: linear-gradient(
   }
 
   .lesson-title {
-    font-size: 3rem;
+    font-size: 2rem;
     color:#ffffff;
     font-weight:bold
   }
+
+  .lesson-description {
+  display:block;
+  font-size: 1.08rem;
+  color: #6b7280;
+  width:60rem;
+}
 }
 
 .lesson-card-header {
@@ -321,9 +346,25 @@ mask-image: linear-gradient(
 }
 
 .lesson-tags {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 0.25rem;
+}
+
+.lesson-footer-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+
+
+.lesson-card.expanded .lesson-tags {
+  display: flex;
+}
+
+.lesson-card.expanded .lesson-footer-tags {
+  display: none;
 }
 
 .lesson-tag {
@@ -369,11 +410,11 @@ mask-image: linear-gradient(
 }
 
 .lesson-toggle-button:hover {
-  background-color: #45c1ff;
+  background-color: #d57bff;
 }
 
 .lesson-toggle-button.active {
-  background-color: #45c1ff;
+  background-color: #d57bff;
   color: #000000;
 }
 
@@ -412,16 +453,15 @@ mask-image: linear-gradient(
 .lesson-toggle-icon {
   display: flex;
   justify-content: flex-end;
-  margin-top: 1rem;
   text-align: right;
 }
 
 .toggle-arrow {
-  width: 1.5rem;
+  width: 1.3rem;
   background-color: #f4f4f4;
-  color: #45c1ff;
+  color: #d57bff;
   border-radius: 50%;
-  height: 1.5rem;
+  height: 1.3rem;
   transition: transform 0.8s ease;
 }
 
@@ -429,7 +469,7 @@ mask-image: linear-gradient(
 .toggle-arrow.open .toggle-arrow:hover {
   transform: scale(1.2);
   background-color: #f4f4f4;
-  color: #45c1ff;
+  color: #d57bff;
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
