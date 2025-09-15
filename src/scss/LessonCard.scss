@@ -4,8 +4,8 @@
   flex: 0 0 auto;
   border-radius: 20px;
   background: linear-gradient(to right, #f2f2f2, #dcdcdc, #b9b9b9);
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 9px 0px,
-    rgba(60, 64, 67, 0.15) 0px 1px 9px 1px;
+  box-shadow: rgba(151, 154, 157, 0.15) 0px 1px 20px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 20px 1px;
   margin: 0 1rem 1rem 0;
 }
 
@@ -190,6 +190,7 @@
   align-items: center;
   z-index: 20;
   pointer-events: auto;
+  border-radius: 22px;;
 }
 
 .lesson-overlay.correct {
@@ -206,7 +207,7 @@
 }
 
 .lesson-card.expanded.overlay-active .lesson-overlay {
-  pointer-events: auto; // allow clicks on overlay
+  pointer-events: auto;
 }
 
 
