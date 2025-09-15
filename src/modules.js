@@ -12,6 +12,7 @@ const modules = {
         img_url:
           'https://ik.imagekit.io/bertbigbite/placeholder-image.webp?updatedAt=1746710764174',
         title: 'Declaring Variables',
+        summary: 'Learn how to declare variables using let and const in JavaScript.',
         tag: 'Beginner',
         date: 'April 29, 2025',
         time: '5',
@@ -36,6 +37,7 @@ const modules = {
         img_url:
           'https://ik.imagekit.io/bertbigbite/placeholder-image.webp?updatedAt=1746710764174',
         title: 'Using Numbers',
+        summary: 'Learn how to create and use numeric variables in JavaScript.',
         tag: 'Beginner',
         date: 'April 29, 2025',
         time: '5',
@@ -61,6 +63,7 @@ const modules = {
         img_url:
           'https://ik.imagekit.io/bertbigbite/placeholder-image.webp?updatedAt=1746710764174',
         title: 'Using Strings',
+        summary: 'Learn how to create and manipulate string variables in JavaScript.',
         tag: 'Beginner',
         date: 'April 29, 2025',
         time: '5',
@@ -86,6 +89,7 @@ const modules = {
         img_url:
           'https://ik.imagekit.io/bertbigbite/placeholder-image.webp?updatedAt=1746710764174',
         title: 'Boolean Values',
+        summary: 'Learn how to use Boolean variables to represent true/false values in JavaScript.',
         tag: 'Beginner',
         date: 'April 29, 2025',
         time: '5',
@@ -109,6 +113,7 @@ const modules = {
         img_url:
           'https://ik.imagekit.io/bertbigbite/placeholder-image.webp?updatedAt=1746710764174',
         title: 'Undefined and Null',
+        summary: 'Understand the difference between undefined and null in JavaScript.',
         tag: 'Beginner',
         date: 'April 29, 2025',
         time: '5',
@@ -136,6 +141,7 @@ const modules = {
         img_url:
           'https://ik.imagekit.io/bertbigbite/placeholder-image.webp?updatedAt=1746710764174',
         title: 'Reassigning Variables',
+        summary: 'Learn how to reassign values to variables declared with let in JavaScript.',
         tag: 'Beginner',
         date: 'April 29, 2025',
         time: '5',
@@ -161,6 +167,7 @@ const modules = {
         img_url:
           'https://ik.imagekit.io/bertbigbite/placeholder-image.webp?updatedAt=1746710764174',
         title: 'Constants',
+        summary: 'Learn how to declare constants using const in JavaScript.',
         tag: 'Beginner',
         date: 'April 29, 2025',
         time: '5',
@@ -185,6 +192,8 @@ const modules = {
         img_url:
           'https://ik.imagekit.io/bertbigbite/placeholder-image.webp?updatedAt=1746710764174',
         title: 'Template Literals',
+        summary:
+          'Learn how to use template literals for easier string interpolation in JavaScript.',
         tag: 'Intermediate',
         date: 'April 29, 2025',
         time: '5',

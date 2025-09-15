@@ -5,7 +5,7 @@ import "../App.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Menu({ modules, onSelect, onColorChange, showIcons = false }) {
+function Menu({ modules, onSelect, onColorChange, showIcons = true }) {
   const rootRef = useRef();
   const indicator1Ref = useRef();
   const indicator2Ref = useRef();

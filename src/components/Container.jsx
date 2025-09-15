@@ -1,15 +1,15 @@
+import React from "react";
 import LessonCard from "./LessonCard";
 import Menu from "./Menu";
 import modules from "../modules";
 import "../scss/Container.scss";
-import React from "react";
 
 function Container({
   lessons,
+  isCorrect,
   moduleName,
   moduleTime,
   moduleSummary,
-  moduleImg,
   moduleQuantity,
   activeLessonId,
   setActiveLessonId,
@@ -23,19 +23,20 @@ function Container({
 
   return (
     <div className={`container ${anyCardExpanded ? "expanded" : ""}`}>
+
       <div className={`container-left ${anyCardExpanded ? "condensed" : ""}`}>
         <div className="sidebar">
-          <img
-            className="logo"
-            src="https://ik.imagekit.io/bertbigbite/logos/logo.png?updatedAt=1749121280588"
-            alt="Logo"
-          />
-          <Menu
+          <div className ="sidebar-header">
+                    <img
+                      src="https://ik.imagekit.io/bertbigbite/logos/logo_dark.png?updatedAt=1749209733881"
+                      alt="Logo"
+                      className="container-logo"
+              />
+              <Menu
             modules={Object.keys(modules).map((name, index) => ({
               name,
               href: "#",
               color: ["#7f5af0", "#ff8906", "#f25f4c", "#2cb67d"][index % 4],
-              icon: modules[name].icon || null,
             }))}
             onSelect={handleSelect}
             activeContent={activeContent}
@@ -43,60 +44,72 @@ function Container({
             onColorChange={setModuleColor}
             showIcons={true}
           />
+      </div>
+
 
           <button
             className="Btn"
             popovertarget="lesson-popover"
             popovertargetaction="hide"
-            style={{ backgroundColor: moduleColor }}
           >
-            <div className="sign">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-house-fill"
-                viewBox="0 0 16 16"
-              >
-                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
-                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
-              </svg>
-            </div>
-
-            <div className="text">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-x-lg"
-                viewBox="0 0 16 16"
-              >
-                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-              </svg>
-            </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+  <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+</svg> back
           </button>
         </div>
       </div>
-
       <div className={`container-right ${anyCardExpanded ? "expanded" : ""}`}>
-        <div
-          className={`module-header-wrapper ${anyCardExpanded ? "hidden" : ""}`}
-        >
-          <div className="module-header-left">
-            <div className="left-top">
-              <div className="left-content">
-                <h1 className="module-welcome">Working with {moduleName}</h1>
-                <h3 className="summary">{moduleSummary}</h3>
-              </div>
-              <div className="right-content">
-                <img className="module-image large" src={moduleImg} alt="" />
-              </div>
-            </div>
+        <div className={`container-body-header ${anyCardExpanded ? "expanded" : ""}`}>
+          <div className="left-content">
+            <h1 className="module-welcome">Working with {moduleName}</h1>
+            <h3 className="summary">{moduleSummary}</h3>
           </div>
+          <input
+            type="text"
+            className={`search-bar ${anyCardExpanded ? "hidden" : ""}`}
+            placeholder="Search lessons..."
+          />
+        </div>
+        <div className={`container-body ${anyCardExpanded ? "expanded" : ""}`}>
+          <div className="container-center">
+          <div className={`module-header-wrapper ${anyCardExpanded ? "hidden" : ""}`}>
+          <div className="module-header-left">
+          </div>
+        </div>
 
-          <div className="module-header-right">
+          <div className={`module-hero ${anyCardExpanded ? "hidden" : ""}`}>
+          <h1>Start learning</h1>
+          </div>
+          <div className={`lesson-grid ${anyCardExpanded ? "grid-expanded" : ""}`}>
+          {lessons.map((lesson) => {
+            const isActive = activeLessonId === lesson.id;
+            const isAnotherLessonOpen = activeLessonId && !isActive;
+
+            if (isAnotherLessonOpen) {
+            return null; // hide all other cards
+            }
+
+            return (
+              <LessonCard
+                key={lesson.id}
+                lesson={lesson}
+                expanded={lesson.id === activeLessonId}
+                onExpand={() => setActiveLessonId(lesson.id)}
+                onCollapse={() => setActiveLessonId(null)}
+                activeLessonId={activeLessonId}
+                setActiveLessonId={setActiveLessonId}
+                lessons={lessons}
+                isCorrect={isCorrect}
+                popoverRef={popoverRef}
+              />
+            );
+          })}
+        </div>
+
+
+          </div>
+          <div className={`container-end ${anyCardExpanded ? "expanded" : ""}`}>
             <span className="quantity">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -127,40 +140,13 @@ function Container({
               <span className="large-info">{moduleTime}</span>{" "}
               <span className="small-info">minutes</span>
             </span>
+
           </div>
         </div>
-
-        <div className={`module-hero ${anyCardExpanded ? "hidden" : ""}`}>
-          <h1>Start learning</h1>
-        </div>
-
-        <div className={`lesson-grid ${anyCardExpanded ? "grid-expanded" : ""}`}>
-          {lessons.map((lesson) => {
-            const isActive = activeLessonId === lesson.id;
-            const isAnotherLessonOpen = activeLessonId && !isActive;
-
-            if (isAnotherLessonOpen) {
-            return null; // hide all other cards
-            }
-
-            return (
-
-
-              <LessonCard
-                key={lesson.id}
-                lesson={lesson}
-                expanded={lesson.id === activeLessonId}
-                onExpand={() => setActiveLessonId(lesson.id)}
-                onCollapse={() => setActiveLessonId(null)}
-                activeLessonId={activeLessonId}
-                setActiveLessonId={setActiveLessonId}
-                lessons={lessons}
-                popoverRef={popoverRef}
-              />
-            );
-          })}
-        </div>
       </div>
+
+
+
     </div>
   );
 }
