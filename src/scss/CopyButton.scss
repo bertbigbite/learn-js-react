@@ -1,0 +1,29 @@
+.copy-btn {
+  display: flex;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    color: #d57bff;
+    transform:scale(0.95);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.copy-message {
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  animation: fadeOut 2s forwards;
+}
+
+.copy-message::before {
+  content: "✔";
+  margin-right: 0.25rem;
+}
