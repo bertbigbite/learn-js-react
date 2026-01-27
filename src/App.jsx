@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import modules from "./modules";
 import Menu from "./components/Menu";
 import Hero from "./components/Hero";
 import ContactBanner from "./components/ContactBanner";
 import Footer from "./components/Footer";
 import Container from "./components/Container";
-import "./App.scss"; // Global styles
+import "./App.scss";
 import HowItWorks from "./components/HowItWorks";
 
 function App() {
@@ -13,12 +13,10 @@ function App() {
   const [activeLessonId, setActiveLessonId] = useState(null);
   const [activeContent, setActiveContent] = useState(null);
   const [moduleColor, setModuleColor] = useState("#f3e8ff");
-
-  const popoverRef = useRef(null);
+  const [isPopoverVisible, setIsPopoverVisible] = useState(false); // NEW STATE
 
   const lessons = modules[activeModule]?.lessons || [];
   const currentLessons = modules[activeModule];
-
 
   const moduleImg =
     modules[activeModule]?.img_url ||
@@ -28,28 +26,13 @@ function App() {
     setActiveModule(name);
     setActiveContent(name);
     setActiveLessonId(null);
-
-    requestAnimationFrame(() => {
-      popoverRef.current?.showPopover();
-    });
+    setIsPopoverVisible(true); // Show popover when module selected
   };
 
   const handleClose = () => {
-    popoverRef.current?.hidePopover();
     setActiveLessonId(null);
+    setIsPopoverVisible(false); // Hide popover
   };
-
-  useEffect(() => {
-    const pop = popoverRef.current;
-    const handleToggle = () => {
-      const isOpen = pop.matches(":popover-open");
-      if (!isOpen) setActiveLessonId(null);
-    };
-
-    pop?.addEventListener("toggle", handleToggle);
-    return () => pop?.removeEventListener("toggle", handleToggle);
-  }, []);
-
 
   return (
     <div className="wrapper">
@@ -80,39 +63,36 @@ function App() {
           </div>
         </div>
 
-        {/* Hero & Popover */}
+        {/* Main Content */}
         <div className="main-content-holder">
           <Hero />
-          <div
-            id="lesson-popover"
-            ref={popoverRef}
-            popover="manual"
-            className="popover-container"
-          >
-            <Container
-              lessons={lessons}
-              activeLessonId={activeLessonId}
-              setActiveLessonId={setActiveLessonId}
-              moduleName={activeModule}
-              moduleTime={currentLessons?.time || ""}
-              moduleQuantity={currentLessons?.quantity || ""}
-              moduleSummary={currentLessons?.summary || ""}
-              moduleImg={moduleImg}
-              moduleColor={moduleColor}
-              setModuleColor={setModuleColor}
-              activeContent={activeModule}
-              handleSelect={handleSelect}
-              handleClose={handleClose}
-              popoverRef={popoverRef}
-            />
-          </div>
+
+          {/* Popover */}
+          {isPopoverVisible && (
+            <div className="popover-container">
+              <Container
+                lessons={lessons}
+                activeLessonId={activeLessonId}
+                setActiveLessonId={setActiveLessonId}
+                moduleName={activeModule}
+                moduleTime={currentLessons?.time || ""}
+                moduleQuantity={currentLessons?.quantity || ""}
+                moduleSummary={currentLessons?.summary || ""}
+                moduleImg={moduleImg}
+                moduleColor={moduleColor}
+                setModuleColor={setModuleColor}
+                activeContent={activeModule}
+                handleSelect={handleSelect}
+                handleClose={handleClose} // Close button inside Container
+              />
+            </div>
+          )}
+
           <HowItWorks />
           <ContactBanner />
           <Footer />
         </div>
-
       </div>
-
     </div>
   );
 }
