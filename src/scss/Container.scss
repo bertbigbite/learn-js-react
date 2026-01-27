@@ -351,21 +351,24 @@
 
 .popover-container {
 position: fixed;
-inset: 0; /* top:0; right:0; bottom:0; left:0 */
+top: 0;
+left: 0;
+right: 0;
 display: flex;
 flex-direction: column;
-justify-content: flex-start; /* don't add huge gaps above/below */
+justify-content: flex-start; /* content at top */
 align-items: center; /* center horizontally */
-background-color: rgba(251, 243, 253, 0.95); /* mostly opaque, semi-transparent to see background */
+background-color: rgba(251, 243, 253, 0.95);
 backdrop-filter: blur(40px);
-padding: 2rem; /* padding only inside content */
-overflow-y: auto; /* scroll if content is taller than viewport */
-width: 100%;
-height: 100%;
-margin: 0; /* remove the auto margins */
+padding: 2rem; /* inner padding only */
+overflow: visible; /* allow it to only wrap content */
+width: 100%; /* full width */
+height: auto; /* height depends on content */
+margin: 0; /* remove any extra margin */
 z-index: 1000;
 animation: fadeIn 0.4s ease-in-out;
 }
+
 .sidebar-header {
   display: flex;
   flex-direction: column;
