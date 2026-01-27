@@ -350,24 +350,22 @@
 }
 
 .popover-container {
+position: fixed;
+inset: 0; /* top:0; right:0; bottom:0; left:0 */
 display: flex;
 flex-direction: column;
-justify-content: space-evenly; /* ✅ this spreads content vertically */
-gap: 0;
-position: fixed;
-inset: 0; /* ✅ top:0; right:0; bottom:0; left:0 */
-background-color: #fbf3fd;
+justify-content: flex-start; /* don't add huge gaps above/below */
+align-items: center; /* center horizontally */
+background-color: rgba(251, 243, 253, 0.95); /* mostly opaque, semi-transparent to see background */
 backdrop-filter: blur(40px);
-border: none;
-overflow: auto;
-min-height: 100%;
-height: auto;
+padding: 2rem; /* padding only inside content */
+overflow-y: auto; /* scroll if content is taller than viewport */
 width: 100%;
-margin: auto;;
+height: 100%;
+margin: 0; /* remove the auto margins */
 z-index: 1000;
 animation: fadeIn 0.4s ease-in-out;
 }
-
 .sidebar-header {
   display: flex;
   flex-direction: column;
