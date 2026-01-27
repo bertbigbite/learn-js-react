@@ -351,20 +351,18 @@
 
 .popover-container {
 position: fixed;
-top: 0;
-left: 0;
-right: 0;
+inset: 0; /* cover entire viewport */
 display: flex;
 flex-direction: column;
-justify-content: flex-start; /* content at top */
-align-items: center; /* center horizontally */
-background-color: rgba(251, 243, 253, 0.95);
-backdrop-filter: blur(40px);
-padding: 2rem; /* inner padding only */
-overflow: visible; /* allow it to only wrap content */
-width: 100%; /* full width */
-height: auto; /* height depends on content */
-margin: 0; /* remove any extra margin */
+justify-content: flex-start; /* align content to top */
+align-items: center; /* horizontally center content */
+background-color: #fbf3fd; /* opaque, hides page behind */
+backdrop-filter: blur(40px); /* optional blur if you like */
+padding: 0; /* no extra top/bottom padding */
+overflow-y: auto; /* scroll if content is taller than viewport */
+width: 100%;
+height: 100%; /* full viewport height */
+margin: 0;
 z-index: 1000;
 animation: fadeIn 0.4s ease-in-out;
 }
