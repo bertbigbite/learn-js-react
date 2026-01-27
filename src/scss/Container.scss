@@ -350,23 +350,23 @@
 }
 
 .popover-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* don't spread content vertically */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* center it */
-  background-color: #fbf3fd;
-  backdrop-filter: blur(40px);
-  border-radius: 20px;
-  overflow: auto;
-  max-height: 90vh; /* prevent it from being taller than viewport */
-  max-width: 90vw; /* prevent it from being wider than viewport */
-  width: fit-content; /* shrink to fit content */
-  padding: 2rem; /* just enough padding inside */
-  z-index: 1000;
-  animation: fadeIn 0.4s ease-in-out;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly; /* ✅ this spreads content vertically */
+gap: 0;
+position: fixed;
+inset: 0; /* ✅ top:0; right:0; bottom:0; left:0 */
+background-color: #fbf3fd;
+backdrop-filter: blur(40px);
+border: none;
+overflow: auto;
+min-height: 100%;
+height: auto;
+width: 100%;
+margin: auto;
+padding: auto; */
+z-index: 1000;
+animation: fadeIn 0.4s ease-in-out;
 }
 
 .sidebar-header {
