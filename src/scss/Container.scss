@@ -397,6 +397,25 @@ margin: 4rem; // remove any inherited margin
   border-radius: 50%;
 }
 
+.sidebar .item {
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: color 0.3s ease-out;
+    text-decoration: none;
+    color: #000000;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin: 5px 0;
+
+    &.active {
+      color: #ffffff;
+    }
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
