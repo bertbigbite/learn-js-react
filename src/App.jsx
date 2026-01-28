@@ -13,7 +13,7 @@ function App() {
   const [activeLessonId, setActiveLessonId] = useState(null);
   const [activeContent, setActiveContent] = useState(null);
   const [moduleColor, setModuleColor] = useState("#f3e8ff");
-  const [isPopoverVisible, setIsPopoverVisible] = useState(false); // NEW STATE
+  const [isPopoverVisible, setIsPopoverVisible] = useState(false);
 
   const lessons = modules[activeModule]?.lessons || [];
   const currentLessons = modules[activeModule];
@@ -26,18 +26,23 @@ function App() {
     setActiveModule(name);
     setActiveContent(name);
     setActiveLessonId(null);
-    setIsPopoverVisible(true); // Show popover when module selected
+    setIsPopoverVisible(true);
   };
 
   const handleClose = () => {
     setActiveLessonId(null);
-    setIsPopoverVisible(false); // Hide popover
+    setIsPopoverVisible(false);
   };
 
   return (
     <div className="wrapper">
-      <div className="app dark">
-        {/* Header */}
+      <div className="app">
+
+
+        {/* Main content - hidden when popover is visible */}
+        {!isPopoverVisible && (
+          <div className="main-content-holder">
+                    {/* Header/Menu stays visible */}
         <div className="header">
           <div className="header-left">
             <img
@@ -46,13 +51,12 @@ function App() {
               alt="Logo"
             />
           </div>
-
           <div className="nav-menu">
             <Menu
               modules={Object.keys(modules).map((name, index) => ({
                 name,
                 href: "#",
-                color: ["#d57bff", "#f3e8ff", "#d57bff", "#f3e8ff"][index % 4]
+                color: ["#d57bff", "#ecdcfd", "#d57bff", "#ecdcfd"][index % 4]
               }))}
               onSelect={handleSelect}
               activeContent={activeContent}
@@ -62,36 +66,32 @@ function App() {
             />
           </div>
         </div>
+            <Hero />
+            <HowItWorks />
+            <Footer />
+          </div>
+        )}
 
-        {/* Main Content */}
-        <div className="main-content-holder">
-          <Hero />
-
-          {/* Popover */}
-          {isPopoverVisible && (
-            <div className="popover-container">
-              <Container
-                lessons={lessons}
-                activeLessonId={activeLessonId}
-                setActiveLessonId={setActiveLessonId}
-                moduleName={activeModule}
-                moduleTime={currentLessons?.time || ""}
-                moduleQuantity={currentLessons?.quantity || ""}
-                moduleSummary={currentLessons?.summary || ""}
-                moduleImg={moduleImg}
-                moduleColor={moduleColor}
-                setModuleColor={setModuleColor}
-                activeContent={activeModule}
-                handleSelect={handleSelect}
-                handleClose={handleClose} // Close button inside Container
-              />
-            </div>
-          )}
-
-          <HowItWorks />
-          <ContactBanner />
-          <Footer />
-        </div>
+        {/* Full-screen popover, OUTSIDE any collapsing parent */}
+        {isPopoverVisible && (
+          <div className="popover-container">
+            <Container
+              lessons={lessons}
+              activeLessonId={activeLessonId}
+              setActiveLessonId={setActiveLessonId}
+              moduleName={activeModule}
+              moduleTime={currentLessons?.time || ""}
+              moduleQuantity={currentLessons?.quantity || ""}
+              moduleSummary={currentLessons?.summary || ""}
+              moduleImg={moduleImg}
+              moduleColor={moduleColor}
+              setModuleColor={setModuleColor}
+              activeContent={activeModule}
+              handleSelect={handleSelect}
+              handleClose={handleClose} // Close button inside Container
+            />
+          </div>
+        )}
       </div>
     </div>
   );

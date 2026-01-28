@@ -94,8 +94,8 @@ html {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  height:100%;
+
   justify-content: center;
   background: var(--bg);
   animation: bg 30s infinite;
@@ -105,23 +105,13 @@ input {
   height: 30px;
 }
 
-.wrapper .header-fixed.visible {
-  padding: 20px;
-}
 
-.wrapper {
-  display: flex;
-  gap:4rem;
-  height:100%;
-  flex-direction: column;
-}
 
 .app {
   position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
   height:auto;
   min-width: 100vw;
   z-index: 0;
@@ -139,8 +129,7 @@ input {
 }
 
 .body {
-  transform-origin: top;
-  transform: scaleY(0.8) scaleX(1.05);
+
   opacity: 0;
   transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55),
     opacity 0.4s ease-in-out, max-width 0.4s ease-in-out,
@@ -171,8 +160,7 @@ input {
   color: white;
   display: flex;
   min-height: 30px;
-  min-width: 80%;
-  border-radius: 8px;
+  min-width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -190,7 +178,8 @@ input {
   align-items: center;
   justify-content: center;
   min-width: 100%;
-  gap: 20px;
+  min-height:100%;
+  gap: 40px;
   transition: all 0.3s ease-in-out;
   z-index: 1;
 }
@@ -199,10 +188,7 @@ input {
   display: none;
 }
 
-.main-content-holder {
-  display:flex;
-  height:100%;
-}
+
 
 .main-content-holder .hero img {
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
@@ -365,14 +351,14 @@ body {
     cursor: pointer;
     transition: color 0.3s ease-out;
     text-decoration: none;
-    color: #000;
+    color: #ffffff;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     font-size: 11px;
     margin: 5px 0;
 
     &.active {
-      color: #fff;
+      color: #000000;
     }
   }
 

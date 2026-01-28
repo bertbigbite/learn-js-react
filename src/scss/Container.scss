@@ -7,7 +7,7 @@
   width: 100%;
   height:auto;
   padding: 0rem;
-  margin: auto;
+  margin: 0;
   background: #ffffff;
   box-shadow: rgba(110, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 35px;
@@ -350,21 +350,17 @@
 }
 
 .popover-container {
-position: fixed;
-inset: 0; /* cover entire viewport */
-display: flex;
-flex-direction: column;
-justify-content: flex-start; /* align content to top */
-align-items: center; /* horizontally center content */
-background-color: #fbf3fd; /* opaque, hides page behind */
-backdrop-filter: blur(40px); /* optional blur if you like */
-padding: 0; /* no extra top/bottom padding */
-overflow-y: auto; /* scroll if content is taller than viewport */
-width: 100%;
-height: 100%; /* full viewport height */
-margin: 0;
+position: relative;
+
+top: 0;
+left: 0;
+min-width: 80%;
+min-height: 100%;
+background-color: white; // or moduleColor
 z-index: 1000;
-animation: fadeIn 0.4s ease-in-out;
+overflow-y: auto;
+padding: 0; // remove any inherited padding
+margin: 4rem; // remove any inherited margin
 }
 
 .sidebar-header {

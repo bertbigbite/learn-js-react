@@ -1,6 +1,4 @@
 import "../scss/Hero.scss";
-import React from "react";
-import HowItWorks from "./HowItWorks";
 
 function Hero() {
   return (
@@ -19,15 +17,11 @@ function Hero() {
               </div>
               <p>Study <span>10+ topics</span> and develop your skills</p>
             </div>
-                      <div className="buttons">
-            <a href="#" className="btn-primary">Get feedback</a>
-            <a href="#" className="btn-secondary">
-              <svg>...</svg>
-              Download iOS App
-            </a>
-
 
           </div>
+          <div className="hero-container-right">
+            <img src="https://ik.imagekit.io/bertbigbite/learn_js_hero.png?updatedAt=1756718006321" alt="Hero Illustration" />
+
           </div>
     </div>
   </section>

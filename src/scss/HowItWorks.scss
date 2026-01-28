@@ -1,33 +1,20 @@
 .hiw-section {
+  position:relative;
   margin:auto;
   padding: 2.5rem;
   background-color: rgba(213, 123, 255, 0.6);
   border-radius: 0;
   width: 100%;
-  transform:translateY(-6rem);
 }
 
 .hiw-container {
-  max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 170px;
+  margin-right: 170px;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-@media (min-width: 640px) {
-  .hiw-container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
 
-@media (min-width: 1024px) {
-  .hiw-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
 
 .hiw-header {
   max-width: 42rem;
@@ -77,26 +64,14 @@
 }
 
 .hiw-dotted-line {
-  position: absolute;
   inset: 0;
   top: 0.5rem;
   display: none;
 }
 
-@media (min-width: 768px) {
-  .hiw-dotted-line {
-    display: block;
-    padding-left: 5rem;
-    padding-right: 5rem;
-  }
-}
 
-@media (min-width: 1280px) {
-  .hiw-dotted-line {
-    padding-left: 11rem;
-    padding-right: 11rem;
-  }
-}
+
+
 
 .hiw-grid {
   position: relative;

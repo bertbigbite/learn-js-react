@@ -4,7 +4,7 @@ import "../scss/HowItWorks.scss";
 
 const HowItWorks = () => {
   return (
-    <section className="hiw-section">
+    <div className="hiw-section">
   <div className="hiw-container">
     <div className="hiw-header">
       <h2>How does it work?</h2>
@@ -17,7 +17,6 @@ const HowItWorks = () => {
     <div className="hiw-steps">
       <div className="hiw-dotted-line">
         <img
-          className="w-full"
           src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg"
           alt=""
         />
@@ -59,7 +58,7 @@ const HowItWorks = () => {
       </div>
     </div>
   </div>
-</section>
+</div>
 
   );
 };
